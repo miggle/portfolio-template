@@ -16,8 +16,8 @@ concurrency:
 
 jobs:
   publish:
-    # Skip on the template repo itself. Repos made from it are not templates, so they publish.
-    if: ${{ !github.event.repository.is_template }}
+    # Skip on the template itself, and on private repos (sites waiting for approval).
+    if: ${{ !github.event.repository.is_template && !github.event.repository.private }}
     runs-on: ubuntu-latest
     environment:
       name: github-pages
